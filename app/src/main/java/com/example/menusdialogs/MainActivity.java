@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private Button buttonDatePicker;
     private Button buttonTimePicker;
+    private Button dialogButton;
     private ArrayList<String> items;
 
     @Override
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         buttonDatePicker = findViewById(R.id.buttonDatePicker);
         buttonTimePicker = findViewById(R.id.buttonTimePicker);
+        dialogButton =  findViewById(R.id.dialogButton);
 
         // Initialize the list of items
         items = new ArrayList<>();
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up Time Picker button
         buttonTimePicker.setOnClickListener(v -> showTimePickerDialog());
+
+        // Dialog Button
+        dialogButton.setOnClickListener(v -> showAlertDialog());
     }
 
     private void showDatePickerDialog() {
@@ -93,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(message)
                 .setPositiveButton("OK", null)
                 .show();
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert Dialog");
+        builder.setMessage("This is an AlertDialog.");
+        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.ViewHolder> {
